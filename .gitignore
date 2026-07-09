@@ -1,0 +1,19 @@
+# Build
+out/
+target/
+bin/
+build/
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# macOS
+.DS_Store
+
+# Rendus / soumissions et gros fichiers de debug
+submissions/
+profile_*.txt
