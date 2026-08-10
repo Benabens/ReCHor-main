@@ -17,3 +17,30 @@ build/
 # Rendus / soumissions et gros fichiers de debug
 submissions/
 profile_*.txt
+
+# Scripts utilitaires locaux (non liés au projet noté)
+run.sh
+rechor-daily.sh
+rechor-auto.sh
+.rechor-last-push
+.rechor-daily.log
+
+# — Tests non publiés (conservés en local) ————————————————————————
+# Doublons : ces 4 classes reprennent, en moins complet, ce que couvrent déjà
+# BufferedConnectionsTest / BufferedRoutesTest / BufferedTransfersTest /
+# BufferedTripsTest (moins de cas, pas de valeurs limites, et pour Routes des
+# assertions tautologiques du type assertEquals(Vehicle.ALL.get(1), vehicle(0))).
+test/ch/epfl/rechor/timetable/mapped/TestBufferedConnections.java
+test/ch/epfl/rechor/timetable/mapped/TestBufferedRoutes.java
+test/ch/epfl/rechor/timetable/mapped/TestBufferedTransfers.java
+test/ch/epfl/rechor/timetable/mapped/TestBufferedTrips.java
+
+# Classes de validation manuelle (main / fenêtre JavaFX, aucune assertion) et
+# contenant des chemins absolus propres à la machine de développement.
+test/testVal/
+
+# Tests écrits pour un jeu de données de mars 2025 qui n'est plus fourni
+# (dossier timetable/2025-03-18 absent, fichier profile_*.txt non versionné) :
+# ils échouent au chargement et ne sont pas rejouables par un visiteur du dépôt.
+test/ch/epfl/rechor/journey/JourneyExtractorTest.java
+test/ch/epfl/rechor/timetable/mapped/FileTimeTableTest.java
