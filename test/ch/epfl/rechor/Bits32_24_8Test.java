@@ -1,7 +1,9 @@
 package ch.epfl.rechor;
 
-import org.junit.Test;
-
+// JUnit 5 (Jupiter) : cet import était « org.junit.Test » (JUnit 4), que le moteur
+// Jupiter ignore — les tests de cette classe n'étaient donc jamais exécutés, alors
+// que leurs assertions venaient déjà de Jupiter.
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 

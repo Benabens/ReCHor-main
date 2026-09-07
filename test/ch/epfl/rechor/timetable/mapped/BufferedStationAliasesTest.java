@@ -50,20 +50,23 @@ class BufferedStationAliasesTest {
 
     @Test
     void bufferedStationAliasesAliasThrowsOnInvalidIndex() {
-        var a1 = new BufferedPlatforms(STRING_TABLE_1, ALIASES_1);
-        var a2 = new BufferedPlatforms(STRING_TABLE_2, ALIASES_2);
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            a1.name(-1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            a1.name(2);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            a2.name(-1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            a2.name(5);
-        });
+        // Ce test instanciait BufferedPlatforms (copier-coller) et appelait name(), une
+        // méthode que BufferedStationAliases ne possède même pas : il passait « par
+        // accident », l'exception venant de la table de chaînes et non du contrôle de
+        // bornes visé. On teste désormais la bonne classe et ses deux accesseurs, aux
+        // bornes réelles (size() vaut 2 pour a1 et 5 pour a2).
+        var a1 = new BufferedStationAliases(STRING_TABLE_1, ALIASES_1);
+        var a2 = new BufferedStationAliases(STRING_TABLE_2, ALIASES_2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> a1.alias(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> a1.alias(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> a1.stationName(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> a1.stationName(2));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> a2.alias(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> a2.alias(5));
+        assertThrows(IndexOutOfBoundsException.class, () -> a2.stationName(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> a2.stationName(5));
     }
 
     @Test

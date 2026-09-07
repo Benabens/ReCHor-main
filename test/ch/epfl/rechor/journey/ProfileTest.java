@@ -29,12 +29,13 @@ class ProfileTest {
         var arrStationId = 1;
         var stationFront = List.of(ParetoFront.EMPTY);
         var profile = new Profile(timeTable, date, arrStationId, stationFront);
-        try {
-            profile.stationFront().add(ParetoFront.EMPTY);
-            assertEquals(1, profile.stationFront().size());
-        } catch (UnsupportedOperationException e) {
-            // expected
-        }
+        // Le corps était auparavant un try/catch(UnsupportedOperationException) vide :
+        // le test réussissait sans rien vérifier si la liste était bien immuable. On
+        // affirme désormais explicitement l'immuabilité (le constructeur compact de
+        // Profile fait List.copyOf), et on vérifie que la liste n'a pas bougé.
+        assertThrows(UnsupportedOperationException.class,
+                () -> profile.stationFront().add(ParetoFront.EMPTY));
+        assertEquals(1, profile.stationFront().size());
     }
 
     @Test

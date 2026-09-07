@@ -50,20 +50,22 @@ class BufferedStationsTest {
 
     @Test
     void bufferedStationsNameThrowsOnInvalidIndex() {
-        var s1 = new BufferedPlatforms(STRING_TABLE_1, STATIONS_1);
-        var s2 = new BufferedPlatforms(STRING_TABLE_2, STATIONS_2);
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            s1.name(-1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            s1.name(2);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            s2.name(-1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            s2.name(4);
-        });
+        // Ce test instanciait BufferedPlatforms (copier-coller) au lieu de
+        // BufferedStations : il passait « par accident », l'exception provenant de la
+        // table de chaînes et non du contrôle de bornes visé. On teste désormais la
+        // bonne classe, sur ses trois accesseurs, aux bornes réelles (2 puis 4).
+        var s1 = new BufferedStations(STRING_TABLE_1, STATIONS_1);
+        var s2 = new BufferedStations(STRING_TABLE_2, STATIONS_2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> s1.name(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> s1.name(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> s1.longitude(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> s1.latitude(2));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> s2.name(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> s2.name(4));
+        assertThrows(IndexOutOfBoundsException.class, () -> s2.longitude(4));
+        assertThrows(IndexOutOfBoundsException.class, () -> s2.latitude(4));
     }
 
     @Test
